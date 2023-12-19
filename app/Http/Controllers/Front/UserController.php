@@ -17,7 +17,7 @@ class UserController
      */
     public function show(User $user): View
     {
-        $authors = User::with('posts')->inRandomOrder()->get()->take(5);
+        $authors = User::withPostsCount()->inRandomOrder()->take(5)->get();
         $posts = Post::displayable()
             ->where('author_id', $user->id)
             ->latest('published_at')

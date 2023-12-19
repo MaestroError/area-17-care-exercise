@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="hidden w-4/12 -mx-8 lg:block">
-                    @include('front.component.sidebar.authors')
+                    @include('front.component.sidebar.authors', ['authors' => $authors])
                     @include('front.component.sidebar.random-post', ['post' => $authors->random()->posts->where('is_active', true)->random()])
                 </div>
             </div>

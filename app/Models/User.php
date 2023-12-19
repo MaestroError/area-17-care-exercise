@@ -11,6 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
 * App\Models\User
@@ -112,5 +113,18 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    
+    /**
+     * Scopes
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeWithPostsCount(Builder $query): Builder
+    {
+        return $query->withCount(['posts' => function (Builder $query) {
+            $query->where('is_active', true);
+        }]);
     }
 }

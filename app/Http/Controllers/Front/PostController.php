@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Builder;
 
 class PostController extends Controller
 {
@@ -16,7 +17,7 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        $authors = User::with('posts')->inRandomOrder()->get()->take(5);
+        $authors = User::withPostsCount()->inRandomOrder()->take(5)->get();
 
         $posts = Post::displayable()
         ->latest('published_at')

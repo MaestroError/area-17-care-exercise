@@ -95,3 +95,14 @@ $ php artisan test
     -   Registered `PostPolicy` in `AuthServiceProvider`.
     -   Added try/catch block in PostController's `update` method to authorize user and return an error message. _(cmt)_
     -   Added the new `test_user_cannot_edit_other_users_post` test case. _(cmt)_
+    -   Created [PR](https://github.com/MaestroError/area-17-care-exercise/pull/2) and merged.
+-   Issue #3: Performance. _(br: branch)_
+    -   Reviewed code and found out:
+        -   The `posts` query seems nice, could be optimized in some small details, but it isn't critical.
+        -   The `authors` query needs a lot of optimizations and have critical issues.
+    -   Optimizing `authors` query used in sidebar component ("Random authors"):
+        -   Moved take method before the `get` method in query chain.
+        -   The method `with` replaced with the `withCount` method and added `is_active = true` condition to replicate the logic used in the `authors.blade.php` template
+        -   Updated the `authors.blade.php` template to use `posts_count` property
+        -   Updated the `@include` directives - passing the authors variable to make obvious, which data is used by the component (increases readibilty)
+        -   Tested, worked - centralized the updated query as a scope to reuse in other controllers
