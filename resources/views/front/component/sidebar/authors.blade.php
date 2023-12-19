@@ -17,7 +17,7 @@
                             {{ $author->username }}
                         </a>
                         <span class="text-sm font-light text-gray-700">
-                            {{ __('Created ') . $author->posts->where('is_active', true)->count() . __(' Posts') }}
+                            {{ __('Created ') . $author->posts_count . __(' Posts') }}
                         </span>
                     </p>
                 </li>
