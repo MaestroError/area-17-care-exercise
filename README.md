@@ -77,8 +77,14 @@ $ php artisan test
 ### Process log
 
 -   Updated packages using `composer update`
--   Checked unit tests by running `php artisan test`
+-   Checked unit tests by running `php artisan test` _(cmt: composer update and unit tests checked)_
     -   fixed `could not find driver (SQL: PRAGMA foreign_keys = ON;)` issue by enabling `pdo_sqlite` extension
--   Created an account and tested everything that is wrote down in "Initial requirements" section
+-   Created an account and tested everything that is wrote down in "Initial requirements" section _(cmt: initial review of application)_
     -   During this process, I was able to replicate permission issue (#2) by replacing post's slug in my post's edit page URL with other post slug created by another user
     -   The permission issue #1 doesn't exist - The user can't edit content without logging in
+-   Strategy: While it is existing project, I decide to maintain existing style and make as few changes as I can.
+-   Issue #1: Stronger passwords _(br: stronger-passwords-issue-1)_
+    -   Found the `PasswordValidationRules` trait with method `passwordRules` used in password related validations
+    -   Updated rules, added: `'min:8'`, `'regex:/[^\w]/'`
+    -   Added a new method `passwordCustomMessages` for specifing that the regex error is related to special characters
+    -   Passed custom messages (using `...` operator) as second parameter in every action which uses the `passwordRules` method
