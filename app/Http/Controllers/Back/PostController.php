@@ -76,6 +76,13 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
+        try {
+            $this->authorize('update', $post);
+        } catch (AuthorizationException $e) {
+            // Redirect back with a custom error message
+            return back()->withErrors(['authorization' => 'You are not authorized to edit this post.']);
+        }
+        
         $validated = $request->validated();
 
         if ($post->is_active === false && $validated['is_publishable']) {

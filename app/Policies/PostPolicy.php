@@ -54,7 +54,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        return true;
+        return $user->id === $post->author_id;
     }
 
     /**
