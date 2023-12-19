@@ -108,5 +108,6 @@ $ php artisan test
         -   Tested, worked - centralized the updated query as a scope to reuse in other controllers _(cmt)_
     -   Considerations about the `posts` query:
         -   Posts query is a pretty good one. I would consider with PM to disable the future publishing (`'published_at', '<=', Carbon::now()`) check in the Post's `published` scope (if it isn't planned), because it is useful with publish scheduling feature and we haven't it in this project.
-        -   Also, I would consider adding caching by pages here, but this change adds the "delay" in displaying new posts on the front, so it needs some discussion too.
+        -   I would consider adding caching by pages here, but this change adds the "delay" in displaying new posts on the front, so it needs some discussion too.
+        -   Also, indexing some columns (author_id, published_at) could be helpful.
     -   Created [PR](https://github.com/MaestroError/area-17-care-exercise/pull/3) and merged.
