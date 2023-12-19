@@ -88,4 +88,10 @@ $ php artisan test
     -   Updated rules, added: `'min:8'`, `'regex:/[^\w]/'`.
     -   Added a new method `passwordCustomMessages` for specifing that the regex error is related to special characters.
     -   Passed custom messages (using unpacking `...` operator) as second parameter in every action which uses the `passwordRules` method. _(cmt)_
-    -   Added the new `test_registration_fails_with_invalid_password` test case _(cmt)_
+    -   Added the new `test_registration_fails_with_invalid_password` test case. _(cmt)_
+    -   Created [PR](https://github.com/MaestroError/area-17-care-exercise/pull/1) and merged.
+-   Issue #2: Permissions. _(br: post-permissions-fix)_
+    -   Found `PostPolicy` and post's update and store requests, which are used in posts controller.
+    -   Registered `PostPolicy` in `AuthServiceProvider`.
+    -   Added try/catch block in PostController's `update` method to authorize user and return an error message. _(cmt)_
+    -   Added the new `test_user_cannot_edit_other_users_post` test case. _(cmt)_
