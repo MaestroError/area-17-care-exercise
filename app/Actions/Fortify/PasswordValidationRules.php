@@ -13,6 +13,13 @@ trait PasswordValidationRules
      */
     protected function passwordRules(): array
     {
-        return ['required', 'string', new Password, 'confirmed'];
+        return ['required', 'string', new Password, 'confirmed', 'min:8', 'regex:/[^\w]/'];
+    }
+
+    protected function passwordCustomMessages() : array
+    {
+        return [
+            'password.regex' => 'The password must include at least one special character.',
+        ];
     }
 }

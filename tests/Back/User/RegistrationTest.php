@@ -40,4 +40,21 @@ class RegistrationTest extends TestCase
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
+
+    public function test_registration_fails_with_invalid_password()
+    {
+        if (! Features::enabled(Features::registration())) {
+            return $this->markTestSkipped('Registration support is not enabled.');
+        }
+
+        $response = $this->post('/register', [
+            'username' => 'TestUser',
+            'email' => 'test@example.com',
+            'password' => 'weakpassword', // Intentionally invalid password
+            'password_confirmation' => 'weakpassword',
+            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
+        ]);
+
+        $response->assertSessionHasErrors('password');
+    }
 }
