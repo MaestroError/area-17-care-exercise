@@ -76,6 +76,9 @@ $ php artisan test
 
 ### Process log
 
--   Updated php packages using `composer update`
+-   Updated packages using `composer update`
 -   Checked unit tests by running `php artisan test`
     -   fixed `could not find driver (SQL: PRAGMA foreign_keys = ON;)` issue by enabling `pdo_sqlite` extension
+-   Created an account and tested everything that is wrote down in "Initial requirements" section
+    -   During this process, I was able to replicate permission issue (#2) by replacing post's slug in my post's edit page URL with other post slug created by another user
+    -   The permission issue #1 doesn't exist - The user can't edit content without logging in
